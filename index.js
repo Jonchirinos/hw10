@@ -1,4 +1,8 @@
 const inquirer = require("inquirer");
+const Employee = require("./lib/Employee");
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
 
 inquirer
     .prompt([
@@ -58,7 +62,7 @@ inquirer
         }
         writeToFile("README.md", data);
     });
-// body html
+// TODO: Generate HTML
 `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -70,7 +74,7 @@ inquirer
     <body>
         
     </body>
-    </html>` // card html
+    </html>` // TODO: Generate card //
 `<!DOCTYPE html>
     <html lang="en">
     <head>
