@@ -3,13 +3,14 @@ const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const fs = require("fs");
 
 inquirer
     .prompt([
         {
             name: "role",
             type: "list",
-            choices: ["Manager", "Engineer", "Intern", "Finish"],
+            choices: ["Manager", "Engineer", "Intern"],
             message: "What Job Role Would You Like To Select?",
         },
         {
@@ -41,6 +42,12 @@ inquirer
             name: "school",
             type: "input",
             message: "Enter Employee's School",
+        },
+        {
+            name: "continue",
+            type: "list",
+            choices: ["yes", "no"],
+            message: "Would you like to add another employee?",
         },
     ])
     .then((answers) => {
