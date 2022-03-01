@@ -57,17 +57,17 @@ function promptUser() {
         .then((answers) => {
             switch (answers.role) {
                 case "Intern":
-                    const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school, answers.role);
+                    const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school);
                     // console.log(newIntern);
                     employees.push(newIntern);
                     break;
                 case "Engineer":
-                    const newEngineer = new Engineer(answers.name, answers.id, answers.email, answers.github, answers.role);
+                    const newEngineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
                     // console.log(newIntern);
                     employees.push(newEngineer);
                     break;
                 case "Manager":
-                    const newManager = new Manager(answers.name, answers.id, answers.email, answers.office, answers.role);
+                    const newManager = new Manager(answers.name, answers.id, answers.email, answers.office);
                     // console.log(newIntern);
                     employees.push(newManager);
                     break;
@@ -92,8 +92,8 @@ function htmlTemplate(data) {
     let tempData = "";
     for (let i = 0; i < data.length; i++) {
         let specialField = "";
-        if (data[i].role === "Intern") {
-            let cardTemplate = `
+        if (data[i].getRole() === "Intern") {
+            tempData += `
            <div>
            <h1>Name: ${data[i].name}</h1>
            <p>Id: ${data[i].id} </p>
@@ -101,16 +101,16 @@ function htmlTemplate(data) {
            </div>
            `;
         }
-        if (data[i].role === "Manager") {
-            let on = `<div>
+        if (data[i].getRole() === "Manager") {
+            tempData += `<div>
            <h1>Name: ${data[i].name}</h1>
            <p>Id: ${data[i].id} </p>
            <p>${specialField} </p>
            </div>
            `;
         }
-        if (data[i].role === "Engineer") {
-            let one = `<div>
+        if (data[i].getRole() === "Engineer") {
+            tempData += `<div>
            <h1>Name: ${data[i].name}</h1>
            <p>Id: ${data[i].id} </p>
            <p>${specialField} </p>
