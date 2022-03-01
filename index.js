@@ -55,23 +55,22 @@ function promptUser() {
         .then((answers) => {
             switch (answers.role) {
                 case "Intern":
-                    const newIntern = new Intern("a", "a", "a", "a");
+                    const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school, answers.role);
                     // console.log(newIntern);
                     employees.push(newIntern);
                     break;
                 case "Engineer":
-                    const newEngineer = new Engineer("a", "a", "a", "a");
+                    const newEngineer = new Engineer(answers.name, answers.id, answers.email, answers.github, answers.role);
                     // console.log(newIntern);
                     employees.push(newEngineer);
                     break;
                 case "Manager":
-                    const newManager = new Manager("a", "a", "a", "a");
+                    const newManager = new Manager(answers.name, answers.id, answers.email, answers.office, answers.role);
                     // console.log(newIntern);
                     employees.push(newManager);
                     break;
             }
 
-            // console.log(employees);
             // if role is 'manager' create new manager object and push into employee array
             // if role is 'engineer' create new manager object and push into employee array
             // if role is 'intern' create new manager object and push into employee array
@@ -92,6 +91,7 @@ function promptUser() {
     }
 }
 
+
 function htmlTemplate(data) {
     let tempData = "";
 
@@ -103,14 +103,28 @@ function htmlTemplate(data) {
         let cardTemplate = `
         <div>
         <h1>Name: ${data[i].name}</h1>
-        <p>Id: ${data[i].name} </p>
+        <p>Id: ${data[i].id} </p>
         <p>${specialField} </p>
         </div>
     `;
+        if (data[i].role === "Manager") {
+        }
+        `<div>
+        <h1>Name: ${data[i].name}</h1>
+        <p>Id: ${data[i].id} </p>
+        <p>${specialField} </p>
+        </div>
+`;
+        if (data[i].role === "Engineer") {
+        }
+        `<div>
+        <h1>Name: ${data[i].name}</h1>
+        <p>Id: ${data[i].id} </p>
+        <p>${specialField} </p>
+        </div>`;
 
-        tempData = tempData + cardTemplate;
+        tempData = tempData + cardTemplate`;
     }
-
     return `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -127,4 +141,4 @@ function htmlTemplate(data) {
     </html>`;
 }
 
-// TODO: Generate HTML
+promptUser();
