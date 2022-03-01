@@ -5,7 +5,6 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const fs = require("fs");
 const employees = [];
-
 function promptUser() {
     inquirer
         .prompt([
@@ -28,21 +27,24 @@ function promptUser() {
             {
                 name: "email",
                 type: "input",
-                message: "Enter Employee's Email Address?",
+                message: "Enter Engineer's Email Address?",
             },
             {
                 name: "office",
                 type: "input",
+                when: (answers) => answers.role === "Manager",
                 message: "Enter Office Number",
             },
             {
                 name: "github",
                 type: "input",
+                when: (answers) => answers.role === "Engineer",
                 message: "Enter The GitHub Username",
             },
             {
                 name: "school",
                 type: "input",
+                when: (answers) => answers.role === "Intern",
                 message: "Enter Employee's School",
             },
             {
@@ -70,7 +72,6 @@ function promptUser() {
                     employees.push(newManager);
                     break;
             }
-
             // if role is 'manager' create new manager object and push into employee array
             // if role is 'engineer' create new manager object and push into employee array
             // if role is 'intern' create new manager object and push into employee array
@@ -79,66 +80,55 @@ function promptUser() {
             // IN NEW FUNCTION else create string literal. note if user doesn't continue, generate html function
             // inside of html loop through employees array to generate divs for cards
             // write employees to html file
-
             writeToFile("index.html", htmlTemplate(employees));
         });
-
-    function writeToFile(fileName, data) {
-        fs.writeFile(fileName, data, (err) => (err ? console.error(err) : console.log("Finished")));
-        // fs.writeFile( file, data, options, callback )
-
-        // TODO: check answers.role
-    }
 }
-
-
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, (err) => (err ? console.error(err) : console.log("Finished")));
+    // fs.writeFile( file, data, options, callback )
+    // TODO: check answers.role
+}
 function htmlTemplate(data) {
     let tempData = "";
-
     for (let i = 0; i < data.length; i++) {
         let specialField = "";
-
         if (data[i].role === "Intern") {
+            let cardTemplate = `
+           <div>
+           <h1>Name: ${data[i].name}</h1>
+           <p>Id: ${data[i].id} </p>
+           <p>${specialField} </p>
+           </div>
+           `;
         }
-        let cardTemplate = `
-        <div>
-        <h1>Name: ${data[i].name}</h1>
-        <p>Id: ${data[i].id} </p>
-        <p>${specialField} </p>
-        </div>
-    `;
         if (data[i].role === "Manager") {
+            let on = `<div>
+           <h1>Name: ${data[i].name}</h1>
+           <p>Id: ${data[i].id} </p>
+           <p>${specialField} </p>
+           </div>
+           `;
         }
-        `<div>
-        <h1>Name: ${data[i].name}</h1>
-        <p>Id: ${data[i].id} </p>
-        <p>${specialField} </p>
-        </div>
-`;
         if (data[i].role === "Engineer") {
+            let one = `<div>
+           <h1>Name: ${data[i].name}</h1>
+           <p>Id: ${data[i].id} </p>
+           <p>${specialField} </p>
+           </div>`;
         }
-        `<div>
-        <h1>Name: ${data[i].name}</h1>
-        <p>Id: ${data[i].id} </p>
-        <p>${specialField} </p>
-        </div>`;
-
-        tempData = tempData + cardTemplate`;
+        // tempData = tempData + cardTemplate;
     }
     return `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
-
-    ${tempData}
-
-    </body>
-    </html>`;
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Document</title>
+   </head>
+   <body>
+   ${tempData}
+   </body>
+   </html>`;
 }
-
 promptUser();
