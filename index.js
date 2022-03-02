@@ -5,28 +5,32 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const fs = require("fs");
 const employees = [];
+
 function promptUser() {
     inquirer
         .prompt([
             {
                 name: "role",
                 type: "list",
-                choices: ["Manager", "Engineer", "Intern"],
+                choices: ["Manager", "Engineer", "Intern", "Done"],
                 message: "What Job Role Would You Like To Select?",
             },
             {
                 name: "name",
                 type: "input",
+                when: (answers) => answers.role !== "Done",
                 message: "Enter Employee Name",
             },
             {
                 name: "id",
                 type: "input",
+                when: (answers) => answers.role !== "Done",
                 message: "EnterEmployee ID?",
             },
             {
                 name: "email",
                 type: "input",
+                when: (answers) => answers.role !== "Done",
                 message: "Enter Engineer's Email Address?",
             },
             {
@@ -47,30 +51,30 @@ function promptUser() {
                 when: (answers) => answers.role === "Intern",
                 message: "Enter Employee's School",
             },
-            {
-                name: "continue",
-                type: "list",
-                choices: ["yes", "no"],
-                message: "Would you like to add another employee?",
-            },
         ])
         .then((answers) => {
             switch (answers.role) {
                 case "Intern":
                     const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school);
-                    // console.log(newIntern);
+                    console.log(newIntern);
                     employees.push(newIntern);
+                    promptUser();
                     break;
                 case "Engineer":
                     const newEngineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
                     // console.log(newIntern);
                     employees.push(newEngineer);
+                    promptUser();
                     break;
                 case "Manager":
                     const newManager = new Manager(answers.name, answers.id, answers.email, answers.office);
                     // console.log(newIntern);
                     employees.push(newManager);
+                    promptUser();
                     break;
+                default:
+                    const data = htmlTemplate();
+                    writeToFile("index.html", data);
             }
             // if role is 'manager' create new manager object and push into employee array
             // if role is 'engineer' create new manager object and push into employee array
@@ -80,7 +84,6 @@ function promptUser() {
             // IN NEW FUNCTION else create string literal. note if user doesn't continue, generate html function
             // inside of html loop through employees array to generate divs for cards
             // write employees to html file
-            writeToFile("index.html", htmlTemplate(employees));
         });
 }
 function writeToFile(fileName, data) {
@@ -88,36 +91,38 @@ function writeToFile(fileName, data) {
     // fs.writeFile( file, data, options, callback )
     // TODO: check answers.role
 }
-function htmlTemplate(data) {
+function htmlTemplate() {
     let tempData = "";
-    for (let i = 0; i < data.length; i++) {
-        let specialField = "";
-        if (data[i].getRole() === "Intern") {
+    for (let i = 0; i < employees.length; i++) {
+        if (employees[i].getRole() === "Intern") {
             tempData += `
            <div>
-           <h1>Name: ${data[i].name}</h1>
-           <p>Id: ${data[i].id} </p>
-           <p>${specialField} </p>
+           <h1>Name: ${employees[i].name}</h1>
+           <h2>${employees[i].getRole()}</h2>
+           <p>Id: ${employees[i].id} </p>
+           <p>${employees[i].school} </p>
            </div>
            `;
         }
-        if (data[i].getRole() === "Manager") {
+        if (employees[i].getRole() === "Manager") {
             tempData += `<div>
-           <h1>Name: ${data[i].name}</h1>
-           <p>Id: ${data[i].id} </p>
-           <p>${specialField} </p>
+           <h1>Name: ${employees[i].name}</h1>
+           <h2>${employees[i].getRole()}</h2>
+           <p>Id: ${employees[i].id} </p>
+           <p>${employees[i].officeNumber} </p>
            </div>
            `;
         }
-        if (data[i].getRole() === "Engineer") {
+        if (employees[i].getRole() === "Engineer") {
             tempData += `<div>
-           <h1>Name: ${data[i].name}</h1>
-           <p>Id: ${data[i].id} </p>
-           <p>${specialField} </p>
+           <h1>Name: ${employees[i].name}</h1>
+           <h2>${employees[i].getRole()}</h2>
+           <p>Id: ${employees[i].id} </p>
+           <p>${employees[i].github} </p>
            </div>`;
         }
-        // tempData = tempData + cardTemplate;
     }
+    console.log(tempData);
     return `<!DOCTYPE html>
    <html lang="en">
    <head>
