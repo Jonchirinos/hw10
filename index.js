@@ -7,7 +7,9 @@ const fs = require("fs");
 const employees = [];
 
 function promptUser() {
+    // runs inquirer npm
     inquirer
+        // list of questions for the user to answer
         .prompt([
             {
                 name: "role",
@@ -18,6 +20,7 @@ function promptUser() {
             {
                 name: "name",
                 type: "input",
+                // if a role is selected, continue with the program.
                 when: (answers) => answers.role !== "Done",
                 message: "Enter Employee Name",
             },
@@ -25,7 +28,7 @@ function promptUser() {
                 name: "id",
                 type: "input",
                 when: (answers) => answers.role !== "Done",
-                message: "EnterEmployee ID?",
+                message: "Enter Employee ID?",
             },
             {
                 name: "email",
@@ -62,13 +65,11 @@ function promptUser() {
                     break;
                 case "Engineer":
                     const newEngineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
-                    // console.log(newIntern);
                     employees.push(newEngineer);
                     promptUser();
                     break;
                 case "Manager":
                     const newManager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
-                    // console.log(newIntern);
                     employees.push(newManager);
                     promptUser();
                     break;
@@ -84,6 +85,7 @@ function writeToFile(fileName, data) {
     // TODO: check answers.role
 }
 function htmlTemplate() {
+    console.log(employees);
     let tempData = "";
     for (let i = 0; i < employees.length; i++) {
         if (employees[i].getRole() === "Intern") {
