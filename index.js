@@ -34,7 +34,7 @@ function promptUser() {
                 message: "Enter Engineer's Email Address?",
             },
             {
-                name: "office",
+                name: "officeNumber",
                 type: "input",
                 when: (answers) => answers.role === "Manager",
                 message: "Enter Office Number",
@@ -67,7 +67,7 @@ function promptUser() {
                     promptUser();
                     break;
                 case "Manager":
-                    const newManager = new Manager(answers.name, answers.id, answers.email, answers.office);
+                    const newManager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
                     // console.log(newIntern);
                     employees.push(newManager);
                     promptUser();
@@ -76,14 +76,6 @@ function promptUser() {
                     const data = htmlTemplate();
                     writeToFile("index.html", data);
             }
-            // if role is 'manager' create new manager object and push into employee array
-            // if role is 'engineer' create new manager object and push into employee array
-            // if role is 'intern' create new manager object and push into employee array
-            // if user wants to create another employee call this function again
-            // note everything is wrapped in a function
-            // IN NEW FUNCTION else create string literal. note if user doesn't continue, generate html function
-            // inside of html loop through employees array to generate divs for cards
-            // write employees to html file
         });
 }
 function writeToFile(fileName, data) {
@@ -100,7 +92,7 @@ function htmlTemplate() {
            <h1>Name: ${employees[i].name}</h1>
            <h2>${employees[i].getRole()}</h2>
            <p>Id: ${employees[i].id} </p>
-           <p>${employees[i].school} </p>
+           <p>University: ${employees[i].school} </p>
            </div>
            `;
         }
@@ -109,7 +101,7 @@ function htmlTemplate() {
            <h1>Name: ${employees[i].name}</h1>
            <h2>${employees[i].getRole()}</h2>
            <p>Id: ${employees[i].id} </p>
-           <p>${employees[i].officeNumber} </p>
+           <p>Office Number: ${employees[i].officeNumber} </p>
            </div>
            `;
         }
@@ -118,7 +110,7 @@ function htmlTemplate() {
            <h1>Name: ${employees[i].name}</h1>
            <h2>${employees[i].getRole()}</h2>
            <p>Id: ${employees[i].id} </p>
-           <p>${employees[i].github} </p>
+           <p>GitHub: ${employees[i].github} </p>
            </div>`;
         }
     }
