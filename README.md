@@ -15,7 +15,7 @@ This program creates a team profile generated page using node.js and javascript.
 
 ## Screenshot
 
-![A screenshot of the website](../Assets/Images/teamProfile.png)
+![A screenshot of the website](../assets/Images/teamProfile.png)
 
 ## Links to Application
 
