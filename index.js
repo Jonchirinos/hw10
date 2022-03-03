@@ -59,7 +59,6 @@ function promptUser() {
             switch (answers.role) {
                 case "Intern":
                     const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school);
-                    console.log(newIntern);
                     employees.push(newIntern);
                     promptUser();
                     break;
@@ -85,12 +84,11 @@ function writeToFile(fileName, data) {
     // TODO: check answers.role
 }
 function htmlTemplate() {
-    console.log(employees);
     let tempData = "";
     for (let i = 0; i < employees.length; i++) {
         if (employees[i].getRole() === "Intern") {
             tempData += `
-           <div class="flex flex-col justify-center items-center border-8 capitalize p-6">
+           <div class="flex flex-col justify-center items-center border-8 p-6">
            <h1>Name: ${employees[i].name}</h1>
            <h2>${employees[i].getRole()}</h2>
            <p>Id: ${employees[i].id} </p>
@@ -100,7 +98,7 @@ function htmlTemplate() {
            `;
         }
         if (employees[i].getRole() === "Manager") {
-            tempData += `<div class="flex flex-col justify-center items-center border-8 capitalize p-6">
+            tempData += `<div class="flex flex-col justify-center items-center border-8 p-6">
            <h1>Name: ${employees[i].name}</h1>
            <h2>${employees[i].getRole()}</h2>
            <p>Id: ${employees[i].id} </p>
@@ -110,7 +108,7 @@ function htmlTemplate() {
            `;
         }
         if (employees[i].getRole() === "Engineer") {
-            tempData += `<div class="flex flex-col justify-center items-center border-8 capitalize p-6">
+            tempData += `<div class="flex flex-col justify-center items-center border-8 p-6">
            <h1>Name: ${employees[i].name}</h1>
            <h2>${employees[i].getRole()}</h2>
            <p>Id: ${employees[i].id} </p>
@@ -119,7 +117,6 @@ function htmlTemplate() {
            </div>`;
         }
     }
-    console.log(tempData);
     return `<!DOCTYPE html>
    <html lang="en">
    <head>
