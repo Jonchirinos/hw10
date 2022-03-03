@@ -131,7 +131,7 @@ function htmlTemplate() {
    </head>
    <body class="flex flex-col justify-center items-center bg-red-400 p-6 text-lg">
    <h1 class="flex justify-center gap-10">Team Profile Page</h1>
-   <div class="flex flex-col border"></div>
+   <div class="flex flex-col"></div>
    <br>
    <div class="flex justify-center gap-10">
    ${tempData}
