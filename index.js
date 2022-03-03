@@ -94,7 +94,7 @@ function htmlTemplate() {
            <h1>Name: ${employees[i].name}</h1>
            <h2>${employees[i].getRole()}</h2>
            <p>Id: ${employees[i].id} </p>
-           <p>Email: ${employees[i].email} </p>
+           <a>Email: ${employees[i].email} </a>
            <p>University: ${employees[i].school} </p>
            </div>
            `;
@@ -104,7 +104,7 @@ function htmlTemplate() {
            <h1>Name: ${employees[i].name}</h1>
            <h2>${employees[i].getRole()}</h2>
            <p>Id: ${employees[i].id} </p>
-           <p>Email: ${employees[i].email} </p>
+           <a>Email: ${employees[i].email} </a>
            <p>Office Number: ${employees[i].officeNumber} </p>
            </div>
            `;
@@ -114,8 +114,8 @@ function htmlTemplate() {
            <h1>Name: ${employees[i].name}</h1>
            <h2>${employees[i].getRole()}</h2>
            <p>Id: ${employees[i].id} </p>
-           <p>Email: ${employees[i].email} </p>
-           <p>GitHub: ${employees[i].github} </p>
+           <a>Email: ${employees[i].email} </a>
+           <a href="https://github.com/${employees[i].github}" target="_blank">${employees[i].github}</a>
            </div>`;
         }
     }
