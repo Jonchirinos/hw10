@@ -90,31 +90,31 @@ function htmlTemplate() {
     for (let i = 0; i < employees.length; i++) {
         if (employees[i].getRole() === "Intern") {
             tempData += `
-           <div class="flex flex-col justify-center items-center border-8 p-6">
+           <div class="flex flex-col justify-center items-center border-8 capitalize p-6">
            <h1>Name: ${employees[i].name}</h1>
            <h2>${employees[i].getRole()}</h2>
            <p>Id: ${employees[i].id} </p>
-           <a>Email: ${employees[i].email} </a>
+           <a href=mailto:${employees[i].email}>Email: ${employees[i].email}</a>
            <p>University: ${employees[i].school} </p>
            </div>
            `;
         }
         if (employees[i].getRole() === "Manager") {
-            tempData += `<div class="flex flex-col justify-center items-center border-8 p-6">
+            tempData += `<div class="flex flex-col justify-center items-center border-8 capitalize p-6">
            <h1>Name: ${employees[i].name}</h1>
            <h2>${employees[i].getRole()}</h2>
            <p>Id: ${employees[i].id} </p>
-           <a>Email: ${employees[i].email} </a>
+           <a href=mailto:${employees[i].email}>Email: ${employees[i].email}</a>
            <p>Office Number: ${employees[i].officeNumber} </p>
            </div>
            `;
         }
         if (employees[i].getRole() === "Engineer") {
-            tempData += `<div class="flex flex-col justify-center items-center border-8 p-6">
+            tempData += `<div class="flex flex-col justify-center items-center border-8 capitalize p-6">
            <h1>Name: ${employees[i].name}</h1>
            <h2>${employees[i].getRole()}</h2>
            <p>Id: ${employees[i].id} </p>
-           <a>Email: ${employees[i].email} </a>
+           <a href=mailto:${employees[i].email}>Email: ${employees[i].email}</a>
            <a href="https://github.com/${employees[i].github}" target="_blank">${employees[i].github}</a>
            </div>`;
         }
@@ -136,6 +136,7 @@ function htmlTemplate() {
    <div class="flex justify-center gap-10">
    ${tempData}
    </div>
+   <footer>Happy Coding<footer>
    </body>
    </html>`;
 }
