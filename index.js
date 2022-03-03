@@ -90,28 +90,31 @@ function htmlTemplate() {
     for (let i = 0; i < employees.length; i++) {
         if (employees[i].getRole() === "Intern") {
             tempData += `
-           <div>
+           <div class="flex flex-col justify-center items-center border-8 p-6">
            <h1>Name: ${employees[i].name}</h1>
            <h2>${employees[i].getRole()}</h2>
            <p>Id: ${employees[i].id} </p>
+           <p>Email: ${employees[i].email} </p>
            <p>University: ${employees[i].school} </p>
            </div>
            `;
         }
         if (employees[i].getRole() === "Manager") {
-            tempData += `<div>
+            tempData += `<div class="flex flex-col justify-center items-center border-8 p-6">
            <h1>Name: ${employees[i].name}</h1>
            <h2>${employees[i].getRole()}</h2>
            <p>Id: ${employees[i].id} </p>
+           <p>Email: ${employees[i].email} </p>
            <p>Office Number: ${employees[i].officeNumber} </p>
            </div>
            `;
         }
         if (employees[i].getRole() === "Engineer") {
-            tempData += `<div>
+            tempData += `<div class="flex flex-col justify-center items-center border-8 p-6">
            <h1>Name: ${employees[i].name}</h1>
            <h2>${employees[i].getRole()}</h2>
            <p>Id: ${employees[i].id} </p>
+           <p>Email: ${employees[i].email} </p>
            <p>GitHub: ${employees[i].github} </p>
            </div>`;
         }
@@ -123,10 +126,16 @@ function htmlTemplate() {
        <meta charset="UTF-8">
        <meta http-equiv="X-UA-Compatible" content="IE=edge">
        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <title>Document</title>
+       <script src="https://cdn.tailwindcss.com"></script>
+       <title>TeamProfilePage</title>
    </head>
-   <body>
+   <body class="flex flex-col justify-center items-center bg-red-400 p-6 text-lg">
+   <h1 class="flex justify-center gap-10">Team Profile Page</h1>
+   <div class="flex flex-col border"></div>
+   <br>
+   <div class="flex justify-center gap-10">
    ${tempData}
+   </div>
    </body>
    </html>`;
 }
