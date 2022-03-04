@@ -6,9 +6,9 @@ This program creates a team profile generated page using node.js and javascript.
 
 ## Technologies Used
 
+-   Javascript
 -   HTML
--   node.js
--   javascript
+-   Node.js
 -   npm inquirer
 -   npm jest
 -   Tailwind CSS
